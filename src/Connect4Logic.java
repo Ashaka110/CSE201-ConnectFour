@@ -1,3 +1,5 @@
+import java.awt.Point;
+
 import javax.swing.JOptionPane;
 
 public class Connect4Logic {
@@ -6,6 +8,7 @@ public class Connect4Logic {
 	
 	boolean hasRedWon, hasYellowWon, isRedTurn;
 	
+	Point lastMove;
 	
 	static final int RED_CHIP_INDEX = 1, YELLOW_CHIP_INDEX = 2;
 	
@@ -24,6 +27,8 @@ public class Connect4Logic {
 		hasRedWon = false; 
 		hasYellowWon = false;
 		
+		lastMove = new Point(-1, -1);
+		
 		board = new int[BoardSizeX][BoardSizeY];
 		for (int x = 0; x < board.length; x++) {
 			for (int y = 0; y < board[x].length; y++) {
@@ -32,10 +37,13 @@ public class Connect4Logic {
 		}	
 	}
 	
-	public void makeMove(int collom, boolean isRed){
+	//returns true on success
+	public boolean makeMove(int collom, boolean isRed){
+		boolean moveMade = false;
 		if(isRedTurn == isRed){
 			if(placeChip(collom, isRed)){
 				toggleTurn();
+				moveMade = true;
 			}
 		}
 		if(checkWin()){
@@ -47,6 +55,8 @@ public class Connect4Logic {
 				resetBoard();
 			}
 		}
+		return moveMade;
+		
 	}
 	
 	private void toggleTurn(){
@@ -80,6 +90,9 @@ public class Connect4Logic {
 		int dropLocation = getColomDropLocation(collom);
 		if(dropLocation != -1){
 			board[collom][dropLocation] =  isRed ? 1 : 2;
+			lastMove.x = collom;
+			lastMove.y = dropLocation;
+			
 			return true;
 		}
 		return false;
@@ -87,7 +100,11 @@ public class Connect4Logic {
 	}
 	
 	public int getColomDropLocation(int collom){
-		if(board[collom][0] != 0 || collom >= BoardSizeX || collom < 0){
+		if(collom >= BoardSizeX || collom < 0)
+		{
+			return -1;
+		}
+		if(board[collom][0] != 0){
 			return -1;
 		}
 		for (int y = 1; y < board[collom].length; y++) {
@@ -187,5 +204,9 @@ public class Connect4Logic {
 	
 	public boolean hasPlayerWon(){
 		return hasRedWon || hasYellowWon;
+	}
+	
+	public Point GetLastMove(){
+		return lastMove;
 	}
 }

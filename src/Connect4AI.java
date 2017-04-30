@@ -7,23 +7,23 @@ public class Connect4AI extends Connect4Player{
 	}
 
 	//returns collom numer
-	public int selectMove(){
+	public boolean selectMove(){
 		
 		int t = findWinningSpot();
 		if(t != -1){
-			game.makeMove(t, isRedPlayer);
+			return game.makeMove(t, isRedPlayer);
 		}else if((t = findOpponentWinLocation()) != -1){
-			game.makeMove(t, isRedPlayer);
+			return game.makeMove(t, isRedPlayer);
 		}else if((t = anticipateTraps()) != -1){
-			game.makeMove(t, isRedPlayer);
+			return game.makeMove(t, isRedPlayer);
 		}else{
 			
 			
 			
 			Random rand = new Random();
-			game.makeMove(rand.nextInt(game.board.length), isRedPlayer);
+			return game.makeMove(rand.nextInt(game.board.length), isRedPlayer);
 		}
-		return 0;
+		//return false;
 	}
 	
 	int anticipateTraps(){
@@ -77,7 +77,7 @@ public class Connect4AI extends Connect4Player{
 			}
 		}
 		//if(opponentWinCount > 0){
-			System.out.println(opponentWinCount);
+		//	System.out.println(opponentWinCount);
 		//}
 		return opponentWinCount > 1;
 	}

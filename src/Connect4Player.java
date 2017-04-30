@@ -9,6 +9,6 @@ public abstract class Connect4Player {
 		isRedPlayer = isRed;
 	}
 	
-	public abstract int selectMove();
+	public abstract boolean selectMove();
 	
 }

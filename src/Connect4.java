@@ -1,7 +1,10 @@
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Connect4 extends JFrame{
 	
@@ -15,5 +18,22 @@ public class Connect4 extends JFrame{
 		Connect4Pannel pannel = new Connect4Pannel();
 		this.add(pannel);
 		setSize(pannel.getPixelSizeX(), pannel.getPixelSizeY() );
+		
+		
+		addWindowListener(new WindowAdapter() {
+
+			  @Override
+			  public void windowClosing(WindowEvent we)
+			  { 
+				  close();
+			  }
+		});
+	}
+	
+	public static void close()
+	{
+		System.out.println("ending");
+		JOptionPane.showMessageDialog(null, "Yellow has won : "  + Connect4Pannel.yellowWinCount + " times\n Red has won : " + Connect4Pannel.redWinCount + " times" , "Connect4", JOptionPane.PLAIN_MESSAGE);
+	    System.exit(0);
 	}
 }

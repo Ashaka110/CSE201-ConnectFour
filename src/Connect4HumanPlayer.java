@@ -1,21 +1,21 @@
 
 public class Connect4HumanPlayer extends Connect4Player {
 
-	Connect4Pannel pannel;
+	PlayState pannel;
 	MouseHandler mouse;
 	
-	public Connect4HumanPlayer(Connect4Logic g, boolean isRed, MouseHandler m, Connect4Pannel p) {
+	public Connect4HumanPlayer(Connect4Logic g, boolean isRed, MouseHandler m, PlayState p) {
 		super(g, isRed);
 		mouse = m;
 		pannel = p;
 	}
 
 	@Override
-	public int selectMove() {
+	public boolean selectMove() {
 		if(mouse.isMousePressed()){
-			game.makeMove(pannel.getCollomMouseOver(), isRedPlayer);
+			return game.makeMove(pannel.getCollomMouseOver(pannel.pannel.getMousePosition()), isRedPlayer);
 		}
-		return 0;
+		return false;
 	}
 
 }
