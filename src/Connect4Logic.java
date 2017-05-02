@@ -9,6 +9,7 @@ public class Connect4Logic {
 	boolean hasRedWon, hasYellowWon, isRedTurn;
 	
 	Point lastMove;
+	Point winA, winB, winC, winD;
 	
 	static final int RED_CHIP_INDEX = 1, YELLOW_CHIP_INDEX = 2;
 	
@@ -126,6 +127,7 @@ public class Connect4Logic {
 					if(board[x][y] == board[x+1][y] &&
 						board[x][y] == board[x+2][y] &&
 						board[x][y] == board[x+3][y] ){
+						setWinPos(x, y, 1, 0);
 						return true;
 					}
 				}
@@ -138,6 +140,7 @@ public class Connect4Logic {
 					if(board[x][y] == board[x][y+1] &&
 						board[x][y] == board[x][y+2] &&
 						board[x][y] == board[x][y+3] ){
+						setWinPos(x, y, 0, 1);
 						return true;
 					}
 				}
@@ -151,6 +154,7 @@ public class Connect4Logic {
 						board[x][y] == board[x+2][y+2] &&
 						board[x][y] == board[x+3][y+3] ){
 						System.out.println("diagonalfound 1");
+						setWinPos(x, y, 1, 1);
 						return true;
 					}
 				}
@@ -163,12 +167,22 @@ public class Connect4Logic {
 						board[x][y] == board[x-2][y+2] &&
 						board[x][y] == board[x-3][y+3] ){
 						System.out.println("diagonalfound 2");
+						setWinPos(x, y, -1, 1);
 						return true;
 					}
 				}
 			}
 		}
 		return false;
+	}
+	
+	void setWinPos(int x, int y, int dx, int dy){
+		winA = new Point(x, y);
+		winB = new Point(x + dx, y + dy);
+		winC = new Point(x + 2*dx, y + 2*dy);
+		winD = new Point(x + 3*dx, y + 3*dy);
+		
+		
 	}
 	
 	

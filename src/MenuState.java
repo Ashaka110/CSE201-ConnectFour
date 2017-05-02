@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Panel;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -16,7 +17,7 @@ public class MenuState extends State{
 		super(pannel);
 		// TODO Auto-generated constructor stub
 
-		Point buttonOffset = new Point(	40, 200);
+		Point buttonOffset = new Point(	150, 200);
 		playButton = new Button(	buttonOffset.x + 40, buttonOffset.y + 40, 80, 40, "Play");
 		optionsButton = new Button( buttonOffset.x + 140,buttonOffset.y + 40, 80, 40, "Options");
 		quitButton = new Button(    buttonOffset.x + 240,buttonOffset.y + 40, 80, 40, "Quit");
@@ -34,13 +35,17 @@ public class MenuState extends State{
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.blue);
-		g.fillRect(0, 0, pannel.getPixelSizeX(), pannel.getPixelSizeY());
+		g.fillRect(0, 0, pannel.getWidth(), pannel.getHeight());
+		
+		
 		
 		playButton.draw(g, playButton.isMouseOver(pannel.getMousePosition()));
 		optionsButton.draw(g, optionsButton.isMouseOver(pannel.getMousePosition()));
 		quitButton.draw(g, quitButton.isMouseOver(pannel.getMousePosition()));
 		
-		g.drawImage(titleImage, 20, 20, 879/2, 196/2, null);
+		
+		g.drawImage(titleImage, 20 +(pannel.getWidth()-879/2 )/2 , -150 +(pannel.getHeight()-196/2)/2, 879/2, 196/2, null);
+		
 	}
 
 	@Override
