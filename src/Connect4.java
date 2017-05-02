@@ -6,6 +6,9 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+/*
+ * Main class, start to start the game
+ */
 public class Connect4 extends JFrame{
 	
 	public static void main(String[] args) {
